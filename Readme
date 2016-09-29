@@ -1,0 +1,105 @@
+Bogdan Alexandru Cionca
+311 CC
+SD - Tema 3 - STP
+
+================================================================================
+
++++++++++++++++++++++++++++++++++++++Intro++++++++++++++++++++++++++++++++++++++
+
+Aceata tema a reprezentat, in opinia mea, cea mai dificila tema pe care am avut-o
+la aceasta materie, nu neaparat prin prisma cerintelor, cat prin faptul ca
+nu am avut teste cu ajutorul carora sa verificam anumite cerinte si prin limitarea
+existenta in ceea ce priveste numarul de vectori si matrice folosite.
+Absenta testelor a reprezentat o bataie mai mare de cap, in timp ce pentru evitarea
+vectorilor si a matricilor a fost necesara implementarea mai multor liste si functii.
+
+================================================================================
+
+++++++++++++++++++++++++++++++++++++Cerinta 1+++++++++++++++++++++++++++++++++++
+
+================================================================================
+
+In cadrul cerintei 1, programul citeste din fisier numarul de switchuri, precum
+si cele n switchuri, si alege switchul cu index minim prin compararea prioritatilor
+si a MACurilor, atunci cand prioritatea este egala. 
+Memorarea switchurilor se face intr-un vector de structuri ce au drept campuri
+indexul switchului, prioritatea, MACul, precum si adresa de inceput spre lista
+de porturi aferente switchului respectiv.
+
+================================================================================
+
+++++++++++++++++++++++++++++++++++++Cerinta 2+++++++++++++++++++++++++++++++++++
+
+================================================================================
+
+Pentru rezolvarea cerintei 2, cunoscandu-se Root Bridge de la pasul 1, se aplica
+algoritmul lui Dijkstra pentru a se obtine costurile minime catre oricare alt
+switch din retea si va retine si switch-ul precedent al fiecarui element, pentru
+a putea reconstitui drumul.
+Cand se gaseste drumul minim spre unul dintre noduri, putem marca portul dintre
+acesta si precedentul sau ca fiind Root Port. In acelasi timp, portul de la capatul
+celalalt al legaturii este marcat ca Designated Port.
+Dupa marcarea tuturor RP, ramane sa se completeze celelalte porturi. Se parcurge
+lista de porturi a fiecarui switch si, acolo unde nu se cunoaste tipul portului,
+se compara in ordine costul, iar mai apoi ID-ul switchurilor sursa si destinatie.
+Pentru realizarea matricei de topologie, se cauta toate root port-urile si se 
+marcheaza 1 in pozitia corespunzatoare, aferenta acestuia.
+In functie de comanda solicitata, se afiseaza porturile cerute.
+
+================================================================================
+
++++++++++++++++++++++++++++++++++++++Cerinta 3++++++++++++++++++++++++++++++++++
+
+================================================================================
+
+In vederea determinarii drumului minim intre doua switchuri, numite in continuare
+A si B folosim drumul catre root bridge al fiecaruia dintre ele. Alte drumuri 
+nu ar putea fi posibile deoarece contin blocked ports. In acest caz, identificam
+4 situatii posibile :
+
+1. A se afla pe drumul lui B spre RootBridge
+2. B se afla pe drumul lui A spre RootBridge
+3. Drumurile spre RootBridge au un switch de intersectie
+4. Drumurile nu au niciun switch comun in afara de RootBridge
+
+Rezolvarea celor 4 cazuri :
+
+1. Se elimina nodurile din drum aflate dupa B si se afiseaza lista.
+2. Se elimina nodurile dinaintea lui A si se afiseaza restul listei drumului
+lui B.
+3. Se elimina toate nodurile aflate in lista lui A dupa nodul de intersectie
+si toate nodurile din B inaintea intersectiei. Se afiseaza ce a ramas din cele
+doua liste.
+4. Se concateneaza cele doua liste, avand grija ca RootBridge sa nu apara de 2 
+ori.
+
+================================================================================
+
+++++++++++++++++++++++++++++++++++++++Cerinta 4+++++++++++++++++++++++++++++++++
+
+================================================================================
+
+Cerinta 4 necesita doar o modificare in structura retelei si reluarea pasilor
+de la cerinta 2.
+Avand configuratia retelei efectuata, se citesc switchurile intre care urmeaza
+sa se intrerupa legatura.
+Se marcheaza porturile dintre ele ca fiind eliminate pentru a nu le lua in 
+considerare mai departe si, daca vreunul a fost RootPort, marcam faptul ca va fi
+necesara re-efectuarea STP. De data aceasta, nu va mai exista muchie intre 
+switchurile dorite si se va gasi un drum alternativ spre RootBridge.
+Se afiseaza, ulterior, porturile dorite ( root sau blocked ), in urma reefectuarii
+configuratiei
+
+================================================================================
+
++++++++++++++++++++++++++++++++++++++++Bonus++++++++++++++++++++++++++++++++++++
+
+================================================================================
+
+Intregul proces de efectuare a temei pana la acest punct a fost suficient de 
+chinuitor, motiv pentru care nu exista o abordare a cerintei bonus in cadrul
+acestei teme.
+
+Va multumesc pentru intelegere!
+
+================================================================================
